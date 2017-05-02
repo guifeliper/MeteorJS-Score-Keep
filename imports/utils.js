@@ -5,3 +5,5 @@ export let greetUser = function (){
 };
 
 export let name = 'Guilherme Reis';
+
+export default 'Default val';
