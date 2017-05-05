@@ -15,6 +15,18 @@ const renderPlayers = function (playersList) {
     });
 }
 
+const handleSubmit = function(e) {
+    let playerName = e.target.playerName.value;
+    e.preventDefault();
+    if ( playerName){
+        e.target.playerName.value = '';
+         Players.insert({
+            name: playerName,
+            score: 0
+        });
+    }
+
+};
 // Adding the JSX at page
 Meteor.startup(function () {
 
@@ -30,16 +42,12 @@ Meteor.startup(function () {
                 <p> Olá {name} </p>
                 <p> Minha segunda linha</p>
                 {renderPlayers(players)}
-                <form>
-                    <input type="text" name="playerName" placeholder="Player name"/>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" name="playerName" placeholder="Player name" />
                     <button>Add Player</button>
-                   </form> 
+                </form>
             </div>
         );
         ReactDOM.render(jsx, document.getElementById('app'));
     });
-/*    Players.insert({
-        name: 'Mayara',
-        score: 210
-    });*/
 });
