@@ -9,13 +9,13 @@ import { Players } from './../imports/api/players';/*mini mongo */
 
 
 // Getting the array in JSX - Dynamic list Render
-const renderPlayers = function (playersList) {
-    return playersList.map(function (player) {
+const renderPlayers = (playersList) =>{
+    return playersList.map((player) => {
         return <p key={player._id}>{player.name} has {player.score} point(s).</p>;
     });
 }
 
-const handleSubmit = function(e) {
+const handleSubmit = (e) =>{
     let playerName = e.target.playerName.value;
     e.preventDefault();
     if ( playerName){
@@ -28,11 +28,11 @@ const handleSubmit = function(e) {
 
 };
 // Adding the JSX at page
-Meteor.startup(function () {
+Meteor.startup(() => {
 
     /* Monitor the queries inside the function 
     when the function changes it re run*/
-    Tracker.autorun(function () {
+    Tracker.autorun( () => {
         let players = Players.find().fetch();
         let title = "Account Settings";
         let name = 'Guilherme';
