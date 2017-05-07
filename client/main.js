@@ -9,18 +9,30 @@ import { Players } from './../imports/api/players';/*mini mongo */
 
 
 // Getting the array in JSX - Dynamic list Render
-const renderPlayers = (playersList) =>{
+const renderPlayers = (playersList) => {
     return playersList.map((player) => {
-        return <p key={player._id}>{player.name} has {player.score} point(s).</p>;
+        return (
+            <p key={player._id}>
+                {player.name} has {player.score} point(s).
+                <button onClick={() => {
+                    Players.update(player._id, {$inc: { score: -1 }});
+                }}>-1</button>
+                <button onClick={() => {
+                    Players.update(player._id, {$inc: { score: 1 }});
+                }}>+1</button>
+                <button onClick={() => Players.remove(player._id)}>X</button>
+            </p>
+
+        );
     });
 }
 
-const handleSubmit = (e) =>{
+const handleSubmit = (e) => {
     let playerName = e.target.playerName.value;
     e.preventDefault();
-    if ( playerName){
+    if (playerName) {
         e.target.playerName.value = '';
-         Players.insert({
+        Players.insert({
             name: playerName,
             score: 0
         });
@@ -32,7 +44,7 @@ Meteor.startup(() => {
 
     /* Monitor the queries inside the function 
     when the function changes it re run*/
-    Tracker.autorun( () => {
+    Tracker.autorun(() => {
         let players = Players.find().fetch();
         let title = "Account Settings";
         let name = 'Guilherme';
