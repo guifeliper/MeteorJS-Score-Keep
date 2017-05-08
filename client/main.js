@@ -5,8 +5,9 @@ import { Tracker } from 'meteor/tracker';
 
 
 import { Players } from './../imports/api/players';/*mini mongo */
-
-
+//Importing React components
+import TitleBar from './../imports/ui/Titlebar';
+import AddPlayer from './../imports/ui/AddPlayer';
 
 // Getting the array in JSX - Dynamic list Render
 const renderPlayers = (playersList) => {
@@ -15,10 +16,10 @@ const renderPlayers = (playersList) => {
             <p key={player._id}>
                 {player.name} has {player.score} point(s).
                 <button onClick={() => {
-                    Players.update(player._id, {$inc: { score: -1 }});
+                    Players.update(player._id, { $inc: { score: -1 } });
                 }}>-1</button>
                 <button onClick={() => {
-                    Players.update(player._id, {$inc: { score: 1 }});
+                    Players.update(player._id, { $inc: { score: 1 } });
                 }}>+1</button>
                 <button onClick={() => Players.remove(player._id)}>X</button>
             </p>
@@ -39,6 +40,7 @@ const handleSubmit = (e) => {
     }
 
 };
+
 // Adding the JSX at page
 Meteor.startup(() => {
 
@@ -50,13 +52,12 @@ Meteor.startup(() => {
         let name = 'Guilherme';
         let jsx = (
             <div>
-                <h1> {title} </h1>
+                <TitleBar />
                 <p> Olá {name} </p>
                 <p> Minha segunda linha</p>
                 {renderPlayers(players)}
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="playerName" placeholder="Player name" />
-                    <button>Add Player</button>
+                    <AddPlayer/>
                 </form>
             </div>
         );
