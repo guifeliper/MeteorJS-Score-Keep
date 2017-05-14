@@ -1,5 +1,6 @@
 import React from 'react';
 import { Players } from './../api/players';/*mini mongo */
+import PropTypes from 'prop-types'
 
 export default class Player extends React.Component{
     render(){

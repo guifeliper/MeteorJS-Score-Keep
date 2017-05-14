@@ -8,14 +8,10 @@ import { Players } from './../imports/api/players';
 //Importing React components
 import TitleBar from './../imports/ui/Titlebar';
 import AddPlayer from './../imports/ui/AddPlayer';
-import Player from './../imports/ui/Player';
+import PlayerList from './../imports/ui/PlayerList';
+
 
 // Getting the array in JSX - Dynamic list Render
-const renderPlayers = (playersList) => {
-    return playersList.map((player) => {
-        return <Player key={player._id} player={player}/>
-    });
-};
 
 
 
@@ -30,12 +26,9 @@ Meteor.startup(() => {
         let name = 'Guilherme';
         let jsx = (
             <div>
-                <TitleBar title={title}/>
-                <p> Olá {name} </p>
-                <p> Minha segunda linha</p>
-                {renderPlayers(players)}
-                
-                    <AddPlayer/>
+                <TitleBar title={title} />
+                <PlayerList players={players}/>
+                <AddPlayer />
             </div>
         );
         ReactDOM.render(jsx, document.getElementById('app'));
