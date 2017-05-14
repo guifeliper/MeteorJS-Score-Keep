@@ -28,18 +28,7 @@ const renderPlayers = (playersList) => {
     });
 }
 
-const handleSubmit = (e) => {
-    let playerName = e.target.playerName.value;
-    e.preventDefault();
-    if (playerName) {
-        e.target.playerName.value = '';
-        Players.insert({
-            name: playerName,
-            score: 0
-        });
-    }
 
-};
 
 // Adding the JSX at page
 Meteor.startup(() => {
@@ -48,17 +37,16 @@ Meteor.startup(() => {
     when the function changes it re run*/
     Tracker.autorun(() => {
         let players = Players.find().fetch();
-        let title = "Account Settings";
+        let title = "Score Keep";
         let name = 'Guilherme';
         let jsx = (
             <div>
-                <TitleBar />
+                <TitleBar title={title}/>
                 <p> Olá {name} </p>
                 <p> Minha segunda linha</p>
                 {renderPlayers(players)}
-                <form onSubmit={handleSubmit}>
+                
                     <AddPlayer/>
-                </form>
             </div>
         );
         ReactDOM.render(jsx, document.getElementById('app'));
