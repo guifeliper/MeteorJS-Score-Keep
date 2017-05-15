@@ -24,6 +24,6 @@ export default class Player extends React.Component{
 };
 
 Player.propTypes = {
-    player: PropTypes.string.isRequired
+    player: PropTypes.object.isRequired
 };
 
