@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 
 /*mini mongo */
-import { Players } from './../imports/api/players';
+import { Players, calculatePlayerPositions } from './../imports/api/players';
 //Importing React components
 import App from './../imports/ui/App';
 
@@ -13,7 +13,8 @@ Meteor.startup(() => {
     when the function changes it re run*/
     Tracker.autorun(() => {
         let players = Players.find({},{sort: {score:-1}}).fetch();
+        let positionedPlayers = calculatePlayerPositions(players);
         let title = "Score Keep";
-        ReactDOM.render(<App title={title} players={players}/>, document.getElementById('app'));
+        ReactDOM.render(<App title={title} players={positionedPlayers}/>, document.getElementById('app'));
     });
 });

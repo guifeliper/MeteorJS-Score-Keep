@@ -2,6 +2,8 @@ import React from 'react';
 import Player from './Player.js';
 import PropTypes from 'prop-types';
 
+import FlipMove from 'react-flip-move';
+
 export default class PlayerList extends React.Component {
   renderPlayers() {
     if (this.props.players.length === 0) {
@@ -19,7 +21,9 @@ export default class PlayerList extends React.Component {
   render() {
     return (
       <div>
-        {this.renderPlayers()}
+        <FlipMove duration={750} easing="ease-out" maintainContainerHeight={true}>
+          {this.renderPlayers()}
+        </FlipMove>
       </div>
     );
   }
